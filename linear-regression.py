@@ -23,16 +23,26 @@ x_valuesTest = dataframeTest[['Brain']]
 y_valuesTest = dataframeTest[['Body']]
 
 # Training des Modells
+
 # Erzeugung Lineare Regression
-body_reg = linear_model.LinearRegression()
+body_regTrain = linear_model.LinearRegression()
 # Übergabe der Daten für Training
-body_reg.fit(x_valuesTrain, y_valuesTrain)
+body_regTrain.fit(x_valuesTrain, y_valuesTrain)
+
+# Erzeugung Lineare Regression
+body_regTest = linear_model.LinearRegression()
+# Übergabe der Daten für Training
+body_regTest.fit(x_valuesTest, y_valuesTest)
 
 # Visualisierung der Daten
+
 # Punkte des Train Datensatzes
 plt.scatter(x_valuesTrain, y_valuesTrain)
 # Punkte des Test Datensatzes
 plt.scatter(x_valuesTest, y_valuesTest, color='red')
-# Vorhersage Graph
-plt.plot(x_valuesTrain, body_reg.predict(x_valuesTrain))
+
+# Train Graph
+plt.plot(x_valuesTrain, body_regTrain.predict(x_valuesTrain))
+# Test Graph
+plt.plot(x_valuesTest, body_regTest.predict(x_valuesTest), color='red')
 plt.show()
