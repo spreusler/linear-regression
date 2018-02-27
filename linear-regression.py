@@ -10,21 +10,29 @@ from sklearn import linear_model
 # Plotting Library
 import matplotlib.pyplot as plt
 
-# Daten einlesen
-dataframe = pd.read_fwf('brain_body.txt')
+# Train Daten einlesen
+dataframeTrain = pd.read_fwf('train.txt')
 # Zuweisung von Spalten
-x_values = dataframe[['Brain']]
-y_values = dataframe[['Body']]
+x_valuesTrain = dataframeTrain[['Brain']]
+y_valuesTrain = dataframeTrain[['Body']]
+
+# Test Daten einlesen
+dataframeTest = pd.read_csv('test.txt', sep=';')
+# Zuweisung von Spalten
+x_valuesTest = dataframeTest[['Brain']]
+y_valuesTest = dataframeTest[['Body']]
 
 # Training des Modells
 # Erzeugung Lineare Regression
 body_reg = linear_model.LinearRegression()
 # Übergabe der Daten für Training
-body_reg.fit(x_values, y_values)
+body_reg.fit(x_valuesTrain, y_valuesTrain)
 
 # Visualisierung der Daten
-# Punkte des Datensatzes
-plt.scatter(x_values, y_values)
+# Punkte des Train Datensatzes
+plt.scatter(x_valuesTrain, y_valuesTrain)
+# Punkte des Test Datensatzes
+plt.scatter(x_valuesTest, y_valuesTest, color='red')
 # Vorhersage Graph
-plt.plot(x_values, body_reg.predict(x_values))
+plt.plot(x_valuesTrain, body_reg.predict(x_valuesTrain))
 plt.show()
